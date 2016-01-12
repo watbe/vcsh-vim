@@ -8,3 +8,4 @@ dotfiles for vim. see watbe/vcsh-zsh-server for more details.
 
 ## Setup
 1. Run `:PluginInstall`
+1. To install GoFormat, etc, run `:GoInstallBinaries`/`:GoUpdateBinaries`

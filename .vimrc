@@ -10,6 +10,14 @@ Plugin 'VundleVim/Vundle.vim' " itself, required
 Plugin 'tpope/vim-fugitive' " git wrapper
 Plugin 'ctrlpvim/ctrlp.vim' " fuzzy file, buffer, mru, tag finder
 Plugin 'Shougo/neocomplete' " autocompletion
+Plugin 'sjl/gundo.vim'      " Gundo (advanced undo with U)
+Plugin 'fatih/vim-go'
+Plugin 'rking/ag.vim'
+Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'tpope/vim-rails'
+Plugin 'slim-template/vim-slim'
+Plugin 'yosssi/vim-ace'
 
 Plugin 'sickill/vim-monokai' " Colorscheme
 
