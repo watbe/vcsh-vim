@@ -18,6 +18,7 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'tpope/vim-rails'
 Plugin 'slim-template/vim-slim'
 Plugin 'yosssi/vim-ace'
+Plugin 'bling/vim-airline'  " statusline plugin
 
 Plugin 'sickill/vim-monokai' " Colorscheme
 
@@ -110,3 +111,7 @@ else
     let &t_SI = "\<Esc>]50;CursorShape=1\x7"
     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
+
+" powerline
+" let g:airline_powerline_fonts = 1
+set laststatus=2
