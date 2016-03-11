@@ -80,17 +80,12 @@ set wildmenu            " visual autocomplete for command menu
 set lazyredraw          " redraw only when we need to.
 set showmatch           " highlight matching [{()}]
 
+" turn off search highlight
+nnoremap <leader><space> :nohlsearch<CR>
+
 " move vertically by visual line
 nnoremap j gj
 nnoremap k gk
-
-" move to beginning/end of line
-nnoremap B ^
-nnoremap E $
-
-" $/^ doesn't do anything
-nnoremap $ <nop>
-nnoremap ^ <nop>
 
 " highlight last inserted text
 nnoremap gV `[v`]
