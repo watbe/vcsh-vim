@@ -1,3 +1,5 @@
+" http://dougblack.io/words/a-good-vimrc.html
+
 " Begin Vundle
 set nocompatible              " be iMproved, required
 filetype off                  " required
