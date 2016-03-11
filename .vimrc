@@ -47,6 +47,9 @@ let g:vim_markdown_folding_disabled=1
 " neocomplete
 let g:neocomplete#enable_at_startup = 1
 
+" neocomplete tab completion
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
 let mapleader=","
 
 colorscheme monokai
@@ -72,6 +75,7 @@ set hlsearch            " highlight matches
 set number              " show line numbers
 set showcmd             " show command in bottom bar
 set cursorline          " highlight current line
+set cursorcolumn        " highlight the current column
 set wildmenu            " visual autocomplete for command menu
 set lazyredraw          " redraw only when we need to.
 set showmatch           " highlight matching [{()}]
@@ -101,7 +105,10 @@ nnoremap <leader>a :Ag
 let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 0
-let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g "" --ignore-dir=Godeps/_workspace'
+
+" Don't show preview windows
+set completeopt-=preview
 
 " allows cursor change in tmux mode
 if exists('$TMUX')
@@ -115,3 +122,9 @@ endif
 " powerline
 " let g:airline_powerline_fonts = 1
 set laststatus=2
+
+" no more arrow keys
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
