@@ -117,7 +117,7 @@ else
 endif
 
 " powerline
-" let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 1
 set laststatus=2
 
 " no more arrow keys
