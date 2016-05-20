@@ -21,6 +21,7 @@ Plugin 'tpope/vim-rails'
 Plugin 'slim-template/vim-slim'
 Plugin 'yosssi/vim-ace'
 Plugin 'bling/vim-airline'  " statusline plugin
+" Plugin 'majutsushi/tagbar'
 
 Plugin 'sickill/vim-monokai' " Colorscheme
 
@@ -102,7 +103,7 @@ nnoremap <leader>a :Ag
 let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 0
-let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g "" --ignore-dir=Godeps/_workspace'
+let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g "" --ignore-dir=.git'
 
 " Don't show preview windows
 set completeopt-=preview
@@ -125,6 +126,13 @@ noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
+
+" Tagbar
+nmap <F8> :TagbarToggle<CR>
+
+" ctags go config
+let s:tlist_def_go_settings = 'go;g:enum;s:struct;u:union;t:type;' .
+                           \ 'v:variable;f:function'
 
 " golang tagbar config
 let g:tagbar_type_go = {
