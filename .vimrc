@@ -11,7 +11,8 @@ Plugin 'VundleVim/Vundle.vim' " itself, required
 
 Plugin 'tpope/vim-fugitive' " git wrapper
 Plugin 'ctrlpvim/ctrlp.vim' " fuzzy file, buffer, mru, tag finder
-Plugin 'Shougo/neocomplete' " autocompletion
+" Plugin 'Shougo/neocomplete' " autocompletion
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'sjl/gundo.vim'      " Gundo (advanced undo with U)
 Plugin 'fatih/vim-go'
 Plugin 'rking/ag.vim'
@@ -21,7 +22,7 @@ Plugin 'tpope/vim-rails'
 Plugin 'slim-template/vim-slim'
 Plugin 'yosssi/vim-ace'
 Plugin 'bling/vim-airline'  " statusline plugin
-" Plugin 'majutsushi/tagbar'
+Plugin 'sourcegraph/sourcegraph-vim'
 
 Plugin 'sickill/vim-monokai' " Colorscheme
 
@@ -47,6 +48,9 @@ set autoindent
 let g:rehash256 = 1
 let g:vim_markdown_folding_disabled=1
 
+" vim-go
+let g:go_fmt_command = "gofmt"
+
 " neocomplete
 let g:neocomplete#enable_at_startup = 1
 
@@ -60,10 +64,10 @@ colorscheme monokai
 set grepprg=grep\ -nH\ $*
 :imap jj <Esc>
 
-au BufNewFile,BufRead *.go setf go
-augroup go
-  let g:go_fmt_command = "goimports"
-augroup END
+"au BufNewFile,BufRead *.go setf go
+"augroup go
+"  let g:go_fmt_command = "goimports"
+"augroup END
 
 set hidden
 set ignorecase smartcase
@@ -133,32 +137,3 @@ nmap <F8> :TagbarToggle<CR>
 " ctags go config
 let s:tlist_def_go_settings = 'go;g:enum;s:struct;u:union;t:type;' .
                            \ 'v:variable;f:function'
-
-" golang tagbar config
-let g:tagbar_type_go = {
-    \ 'ctagstype' : 'go',
-    \ 'kinds'     : [
-        \ 'p:package',
-        \ 'i:imports:1',
-        \ 'c:constants',
-        \ 'v:variables',
-        \ 't:types',
-        \ 'n:interfaces',
-        \ 'w:fields',
-        \ 'e:embedded',
-        \ 'm:methods',
-        \ 'r:constructor',
-        \ 'f:functions'
-    \ ],
-    \ 'sro' : '.',
-    \ 'kind2scope' : {
-        \ 't' : 'ctype',
-        \ 'n' : 'ntype'
-    \ },
-    \ 'scope2kind' : {
-        \ 'ctype' : 't',
-        \ 'ntype' : 'n'
-    \ },
-    \ 'ctagsbin'  : 'gotags',
-    \ 'ctagsargs' : '-sort -silent'
-\ }
