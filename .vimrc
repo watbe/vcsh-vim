@@ -10,11 +10,12 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim' " itself, required
 
 Plugin 'tpope/vim-fugitive' " git wrapper
-Plugin 'ctrlpvim/ctrlp.vim' " fuzzy file, buffer, mru, tag finder
+" Plugin 'ctrlpvim/ctrlp.vim' " fuzzy file, buffer, mru, tag finder
 " Plugin 'Shougo/neocomplete' " autocompletion
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'sjl/gundo.vim'      " Gundo (advanced undo with U)
 Plugin 'fatih/vim-go'
+Plugin 'vim-ruby/vim-ruby'
 Plugin 'rking/ag.vim'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'kchmck/vim-coffee-script'
@@ -22,7 +23,7 @@ Plugin 'tpope/vim-rails'
 Plugin 'slim-template/vim-slim'
 Plugin 'yosssi/vim-ace'
 Plugin 'bling/vim-airline'  " statusline plugin
-Plugin 'sourcegraph/sourcegraph-vim'
+" Plugin 'sourcegraph/sourcegraph-vim'
 
 Plugin 'sickill/vim-monokai' " Colorscheme
 
@@ -62,7 +63,7 @@ let mapleader=","
 colorscheme monokai
 
 set grepprg=grep\ -nH\ $*
-:imap jj <Esc>
+inoremap jj <Esc>
 
 "au BufNewFile,BufRead *.go setf go
 "augroup go
@@ -137,3 +138,8 @@ nmap <F8> :TagbarToggle<CR>
 " ctags go config
 let s:tlist_def_go_settings = 'go;g:enum;s:struct;u:union;t:type;' .
                            \ 'v:variable;f:function'
+
+" fzf
+set rtp+=~/.fzf
+nnoremap <C-P> :FZF<CR>
+inoremap <C-P> :FZF<CR>
