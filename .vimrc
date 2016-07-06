@@ -14,6 +14,7 @@ Plugin 'tpope/vim-fugitive' " git wrapper
 Plugin 'sjl/gundo.vim'      " Gundo (advanced undo with U)
 Plugin 'fatih/vim-go'
 Plugin 'ervandew/supertab'
+Plugin 'Blackrush/vim-gocode'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'rking/ag.vim'
 Plugin 'ntpeters/vim-better-whitespace'
@@ -45,17 +46,19 @@ syntax on
 syntax enable
 set shiftwidth=2 tabstop=2 expandtab
 set autoindent
-let g:rehash256 = 1
 let g:vim_markdown_folding_disabled=1
 
 " vim-go
 let g:go_fmt_command = "gofmt"
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
 
-" neocomplete
-let g:neocomplete#enable_at_startup = 1
-
-" neocomplete tab completion
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" supertab
+let g:SuperTabDefaultCompletionType = "context"
 
 let mapleader=","
 
