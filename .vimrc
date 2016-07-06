@@ -10,11 +10,10 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim' " itself, required
 
 Plugin 'tpope/vim-fugitive' " git wrapper
-" Plugin 'ctrlpvim/ctrlp.vim' " fuzzy file, buffer, mru, tag finder
-" Plugin 'Shougo/neocomplete' " autocompletion
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 Plugin 'sjl/gundo.vim'      " Gundo (advanced undo with U)
 Plugin 'fatih/vim-go'
+Plugin 'ervandew/supertab'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'rking/ag.vim'
 Plugin 'ntpeters/vim-better-whitespace'
