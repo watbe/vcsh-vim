@@ -10,10 +10,12 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim' " itself, required
 
 Plugin 'tpope/vim-fugitive' " git wrapper
-Plugin 'ctrlpvim/ctrlp.vim' " fuzzy file, buffer, mru, tag finder
-Plugin 'Shougo/neocomplete' " autocompletion
+" Plugin 'Valloric/YouCompleteMe'
 Plugin 'sjl/gundo.vim'      " Gundo (advanced undo with U)
 Plugin 'fatih/vim-go'
+Plugin 'ervandew/supertab'
+Plugin 'Blackrush/vim-gocode'
+Plugin 'vim-ruby/vim-ruby'
 Plugin 'rking/ag.vim'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'kchmck/vim-coffee-script'
@@ -47,26 +49,31 @@ syntax on
 syntax enable
 set shiftwidth=2 tabstop=2 expandtab
 set autoindent
-let g:rehash256 = 1
 let g:vim_markdown_folding_disabled=1
 
-" neocomplete
-let g:neocomplete#enable_at_startup = 1
+" vim-go
+let g:go_fmt_command = "gofmt"
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
 
-" neocomplete tab completion
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" supertab
+let g:SuperTabDefaultCompletionType = "context"
 
 let mapleader=","
 
 colorscheme monokai
 
 set grepprg=grep\ -nH\ $*
-:imap jj <Esc>
+inoremap jj <Esc>
 
-au BufNewFile,BufRead *.go setf go
-augroup go
-  let g:go_fmt_command = "goimports"
-augroup END
+"au BufNewFile,BufRead *.go setf go
+"augroup go
+"  let g:go_fmt_command = "goimports"
+"augroup END
 
 set hidden
 set ignorecase smartcase
@@ -106,7 +113,7 @@ nnoremap <leader>a :Ag
 let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 0
-let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g "" --ignore-dir=Godeps/_workspace'
+let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g "" --ignore-dir=.git'
 
 " Don't show preview windows
 set completeopt-=preview
@@ -132,3 +139,14 @@ noremap <Right> <NOP>
 
 " jsx for all js files
 let g:jsx_ext_required = 0
+" Tagbar
+nmap <F8> :TagbarToggle<CR>
+
+" ctags go config
+let s:tlist_def_go_settings = 'go;g:enum;s:struct;u:union;t:type;' .
+                           \ 'v:variable;f:function'
+
+" fzf
+set rtp+=~/.fzf
+nnoremap <C-P> :FZF<CR>
+inoremap <C-P> :FZF<CR>
