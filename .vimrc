@@ -21,6 +21,10 @@ Plugin 'tpope/vim-rails'
 Plugin 'slim-template/vim-slim'
 Plugin 'yosssi/vim-ace'
 Plugin 'bling/vim-airline'  " statusline plugin
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Plugin 'othree/yajs.vim'
+Plugin 'Chiel92/vim-autoformat' " autoformat - could be slow!
 
 Plugin 'sickill/vim-monokai' " Colorscheme
 
@@ -125,3 +129,6 @@ noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
+
+" jsx for all js files
+let g:jsx_ext_required = 0
