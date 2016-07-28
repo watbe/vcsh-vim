@@ -10,10 +10,12 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim' " itself, required
 
 Plugin 'tpope/vim-fugitive' " git wrapper
-Plugin 'ctrlpvim/ctrlp.vim' " fuzzy file, buffer, mru, tag finder
-Plugin 'Shougo/neocomplete' " autocompletion
+" Plugin 'Valloric/YouCompleteMe'
 Plugin 'sjl/gundo.vim'      " Gundo (advanced undo with U)
 Plugin 'fatih/vim-go'
+Plugin 'ervandew/supertab'
+Plugin 'Blackrush/vim-gocode'
+Plugin 'vim-ruby/vim-ruby'
 Plugin 'rking/ag.vim'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'kchmck/vim-coffee-script'
@@ -21,7 +23,10 @@ Plugin 'tpope/vim-rails'
 Plugin 'slim-template/vim-slim'
 Plugin 'yosssi/vim-ace'
 Plugin 'bling/vim-airline'  " statusline plugin
-" Plugin 'majutsushi/tagbar'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Plugin 'othree/yajs.vim'
+Plugin 'Chiel92/vim-autoformat' " autoformat - could be slow!
 
 Plugin 'sickill/vim-monokai' " Colorscheme
 
@@ -44,26 +49,31 @@ syntax on
 syntax enable
 set shiftwidth=2 tabstop=2 expandtab
 set autoindent
-let g:rehash256 = 1
 let g:vim_markdown_folding_disabled=1
 
-" neocomplete
-let g:neocomplete#enable_at_startup = 1
+" vim-go
+let g:go_fmt_command = "gofmt"
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
 
-" neocomplete tab completion
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" supertab
+let g:SuperTabDefaultCompletionType = "context"
 
 let mapleader=","
 
 colorscheme monokai
 
 set grepprg=grep\ -nH\ $*
-:imap jj <Esc>
+inoremap jj <Esc>
 
-au BufNewFile,BufRead *.go setf go
-augroup go
-  let g:go_fmt_command = "goimports"
-augroup END
+"au BufNewFile,BufRead *.go setf go
+"augroup go
+"  let g:go_fmt_command = "goimports"
+"augroup END
 
 set hidden
 set ignorecase smartcase
@@ -127,6 +137,8 @@ noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
 
+" jsx for all js files
+let g:jsx_ext_required = 0
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
 
@@ -164,3 +176,8 @@ let g:tagbar_type_go = {
 \ }
 
 set backspace=indent,eol,start
+
+" fzf
+set rtp+=~/.fzf
+nnoremap <C-P> :FZF<CR>
+inoremap <C-P> :FZF<CR>
