@@ -27,7 +27,8 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'othree/yajs.vim'
 Plugin 'Chiel92/vim-autoformat' " autoformat - could be slow!
-Bundle 'uarun/vim-protobuf'
+Plugin 'tpope/vim-abolish'
+Plugin 'uarun/vim-protobuf'
 
 Plugin 'sickill/vim-monokai' " Colorscheme
 
