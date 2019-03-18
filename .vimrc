@@ -9,26 +9,16 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim' " itself, required
 
-Plugin 'tpope/vim-fugitive' " git wrapper
-" Plugin 'Valloric/YouCompleteMe'
+" Plugin 'tpope/vim-fugitive' " git wrapper
 Plugin 'sjl/gundo.vim'      " Gundo (advanced undo with U)
 Plugin 'fatih/vim-go'
 Plugin 'ervandew/supertab'
 Plugin 'Blackrush/vim-gocode'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'rking/ag.vim'
 Plugin 'ntpeters/vim-better-whitespace'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'tpope/vim-rails'
-Plugin 'slim-template/vim-slim'
-Plugin 'yosssi/vim-ace'
 Plugin 'bling/vim-airline'  " statusline plugin
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
-Plugin 'othree/yajs.vim'
-Plugin 'Chiel92/vim-autoformat' " autoformat - could be slow!
-Plugin 'tpope/vim-abolish'
+" Plugin 'tpope/vim-abolish'
 Plugin 'uarun/vim-protobuf'
+Plugin 'elubow/cql-vim'
 
 Plugin 'sickill/vim-monokai' " Colorscheme
 
@@ -53,50 +43,47 @@ set shiftwidth=2 tabstop=2 expandtab
 set autoindent
 let g:vim_markdown_folding_disabled=1
 
-" vim-go
-let g:go_fmt_command = "gofmt"
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_types = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-
 " supertab
 let g:SuperTabDefaultCompletionType = "context"
 
-let mapleader=","
+let mapleader=" "
 
 colorscheme monokai
 
 set grepprg=grep\ -nH\ $*
 inoremap jj <Esc>
 
-"au BufNewFile,BufRead *.go setf go
-"augroup go
-"  let g:go_fmt_command = "goimports"
-"augroup END
-
 set hidden
 set ignorecase smartcase
 
 "move between splits with Ctrl + HJKL
-map <C-J> <C-W>j<C-W>_
-map <C-K> <C-W>k<C-W>_
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+command Wq wq
+command WQ wq
+command W w
+command Q q
 
 set incsearch           " search as characters are entered
 set hlsearch            " highlight matches
 
-set number              " show line numbers
 set showcmd             " show command in bottom bar
 set cursorline          " highlight current line
 set cursorcolumn        " highlight the current column
 set wildmenu            " visual autocomplete for command menu
 set lazyredraw          " redraw only when we need to.
 set showmatch           " highlight matching [{()}]
+set splitbelow          " more natural split panes
+set splitright          " see above
 
 " turn off search highlight
-nnoremap <leader><space> :nohlsearch<CR>
+nnoremap <leader>, :nohlsearch<CR>
+
+" save files with <space><space>
+nnoremap <leader><space> :w<CR>
 
 " move vertically by visual line
 nnoremap j gj
@@ -109,7 +96,7 @@ nnoremap gV `[v`]
 nnoremap U :GundoToggle<CR>
 
 " open ag.vim
-nnoremap <leader>a :Ag
+" nnoremap <leader>a :Ag
 
 " CtrlP settings
 let g:ctrlp_match_window = 'bottom,order:ttb'
@@ -139,23 +126,47 @@ noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
 
-" jsx for all js files
-let g:jsx_ext_required = 0
-" Tagbar
-nmap <F8> :TagbarToggle<CR>
-
 " ctags go config
 let s:tlist_def_go_settings = 'go;g:enum;s:struct;u:union;t:type;' .
                            \ 'v:variable;f:function'
 " vim-go
+" run :GoBuild or :GoTestCompile based on the go file
+function! s:build_go_files()
+  let l:file = expand('%')
+  if l:file =~# '^\f\+_test\.go$'
+    call go#test#Test!(0, 1)
+  elseif l:file =~# '^\f\+\.go$'
+    call go#cmd#Build(0)
+  endif
+endfunction
+
+" autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
+
 au FileType go nmap <leader>r <Plug>(go-run)
-au FileType go nmap <leader>b <Plug>(go-build)
 au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>b <Plug>(go-build)
 au FileType go nmap <leader>c <Plug>(go-coverage)
+map <C-n> :cnext<CR>
+map <C-m> :cprevious<CR>
+nnoremap <leader>a :cclose<CR>
+nnoremap <leader>i :GoImports<CR>
 
 set backspace=indent,eol,start
 
+" vim-go
+let g:go_fmt_command = "gofmt"
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_loclist_height = 10
+let g:go_quickfix_height = 10
+let g:go_list_height = 10
+let g:go_jump_to_error = 0
+
 " fzf
-set rtp+=~/.fzf
+set rtp+=/usr/local/opt/fzf
 nnoremap <C-P> :FZF<CR>
 inoremap <C-P> :FZF<CR>
