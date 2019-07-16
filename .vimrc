@@ -9,16 +9,16 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim' " itself, required
 
-" Plugin 'tpope/vim-fugitive' " git wrapper
-Plugin 'sjl/gundo.vim'      " Gundo (advanced undo with U)
+Plugin 'tpope/vim-fugitive' " git wrapper
 Plugin 'fatih/vim-go'
 Plugin 'ervandew/supertab'
 Plugin 'Blackrush/vim-gocode'
-Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'mbbill/undotree'
+" Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'bling/vim-airline'  " statusline plugin
 " Plugin 'tpope/vim-abolish'
 Plugin 'uarun/vim-protobuf'
-Plugin 'elubow/cql-vim'
+" Plugin 'elubow/cql-vim'
 
 Plugin 'sickill/vim-monokai' " Colorscheme
 
@@ -74,10 +74,13 @@ set showcmd             " show command in bottom bar
 set cursorline          " highlight current line
 set cursorcolumn        " highlight the current column
 set wildmenu            " visual autocomplete for command menu
-set lazyredraw          " redraw only when we need to.
 set showmatch           " highlight matching [{()}]
 set splitbelow          " more natural split panes
 set splitright          " see above
+
+" https://github.com/tmux/tmux/issues/353#issuecomment-342741778
+set ttyfast 
+set lazyredraw          " redraw only when we need to.
 
 " turn off search highlight
 nnoremap <leader>, :nohlsearch<CR>
@@ -105,7 +108,7 @@ let g:ctrlp_working_path_mode = 0
 let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g "" --ignore-dir=.git'
 
 " Don't show preview windows
-set completeopt-=preview
+" set completeopt-=preview
 
 " allows cursor change in tmux mode
 if exists('$TMUX')
@@ -129,26 +132,15 @@ noremap <Right> <NOP>
 " ctags go config
 let s:tlist_def_go_settings = 'go;g:enum;s:struct;u:union;t:type;' .
                            \ 'v:variable;f:function'
-" vim-go
-" run :GoBuild or :GoTestCompile based on the go file
-function! s:build_go_files()
-  let l:file = expand('%')
-  if l:file =~# '^\f\+_test\.go$'
-    call go#test#Test!(0, 1)
-  elseif l:file =~# '^\f\+\.go$'
-    call go#cmd#Build(0)
-  endif
-endfunction
-
-" autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
 
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>t <Plug>(go-test)
 au FileType go nmap <leader>b <Plug>(go-build)
 au FileType go nmap <leader>c <Plug>(go-coverage)
-map <C-n> :cnext<CR>
-map <C-m> :cprevious<CR>
-nnoremap <leader>a :cclose<CR>
+nnoremap <leader>a :lclose<CR>
+nnoremap <leader>o :lopen<CR>
+nnoremap <leader>n :lnext<CR>
+nnoremap <leader>p :lprevious<CR>
 nnoremap <leader>i :GoImports<CR>
 
 set backspace=indent,eol,start
@@ -165,6 +157,11 @@ let g:go_loclist_height = 10
 let g:go_quickfix_height = 10
 let g:go_list_height = 10
 let g:go_jump_to_error = 0
+let g:go_list_type = "locationlist"
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+
+set mouse=n
 
 " fzf
 set rtp+=/usr/local/opt/fzf
