@@ -20,7 +20,7 @@ Plugin 'bling/vim-airline'  " statusline plugin
 Plugin 'uarun/vim-protobuf'
 " Plugin 'elubow/cql-vim'
 
-Plugin 'sickill/vim-monokai' " Colorscheme
+" Plugin 'sickill/vim-monokai' " Colorscheme
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -48,7 +48,7 @@ let g:SuperTabDefaultCompletionType = "context"
 
 let mapleader=" "
 
-colorscheme monokai
+" colorscheme monokai
 
 set grepprg=grep\ -nH\ $*
 inoremap jj <Esc>
@@ -72,7 +72,7 @@ set hlsearch            " highlight matches
 
 set showcmd             " show command in bottom bar
 set cursorline          " highlight current line
-set cursorcolumn        " highlight the current column
+" set cursorcolumn        " highlight the current column
 set wildmenu            " visual autocomplete for command menu
 set showmatch           " highlight matching [{()}]
 set splitbelow          " more natural split panes
@@ -96,7 +96,7 @@ nnoremap k gk
 nnoremap gV `[v`]
 
 " tree undo
-nnoremap U :GundoToggle<CR>
+nnoremap U :UndotreeToggle<CR>
 
 " open ag.vim
 " nnoremap <leader>a :Ag
